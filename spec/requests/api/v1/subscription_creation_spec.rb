@@ -10,9 +10,9 @@ RSpec.describe 'Subscription creation endpoint' do
   end
   it 'can get a successful response' do
     headers = { "CONTENT_TYPE" => "application/json" }
-    sub_params = { user: @customer1.id, tea: @tea1.id, frequency: 1, price: 1499 }
+    sub_params = { customer_id: @customer1.id, tea_id: @tea1.id, frequency: 1, price: 1499, title: "Monthly White Jade" }
 
-    post "/api/v1/subscription", headers: headers, params: JSON.generate(sub_params)
+    post "/api/v1/subscriptions", headers: headers, params: JSON.generate(sub_params)
     expect(response).to be_successful
     expect(response.status).to eq(201)
   end
