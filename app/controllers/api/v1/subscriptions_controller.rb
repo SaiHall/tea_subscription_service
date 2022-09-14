@@ -1,7 +1,8 @@
 class Api::V1::SubscriptionsController < ApplicationController
 
   def create
-    CustomerSubscription.create!(sub_params)
+    cust_sub = CustomerSubscription.create!(sub_params)
+    render json: CustomerSubscriptionSerializer.new_sub(cust_sub)
   end
 
   private
