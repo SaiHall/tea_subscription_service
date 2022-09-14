@@ -36,5 +36,11 @@ RSpec.describe 'Subscription creation endpoint' do
     expect(new_sub_return[:frequency]).to be_a(String)
     expect(new_sub_return[:cost]).to be_a(Float)
     expect(new_sub_return[:status]).to be_a(String)
+
+    expect(new_sub_return[:customer]).to eq("Jimbob Dudeguy")
+    expect(new_sub_return[:tea]).to eq("White Jade")
+    expect(new_sub_return[:frequency]).to eq("weekly")
+    expect(new_sub_return[:cost]).to eq(14.99)
+    expect(new_sub_return[:status]).to eq("active")
   end
 end
