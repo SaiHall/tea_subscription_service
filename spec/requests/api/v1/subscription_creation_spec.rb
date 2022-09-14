@@ -27,10 +27,14 @@ RSpec.describe 'Subscription creation endpoint' do
     post "/api/v1/subscriptions", headers: headers, params: JSON.generate(sub_params)
 
     response_body = JSON.parse(response.body, symbolize_names: true)
-    new_sub_return = response_body
+    new_sub_return = response_body[:data]
 
     expect(new_sub_return).to be_a(Hash)
+    expect(new_sub_return.keys).to eq([:customer, :tea, :frequency, :cost, :status])
+    expect(new_sub_return[:customer]).to be_a(String)
+    expect(new_sub_return[:tea]).to be_a(String)
+    expect(new_sub_return[:frequency]).to be_a(String)
+    expect(new_sub_return[:cost]).to be_a(Float)
+    expect(new_sub_return[:status]).to be_a(String)
   end
-
-
 end
