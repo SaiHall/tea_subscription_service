@@ -18,4 +18,8 @@ class CustomerSubscription < ApplicationRecord
   def cost
     subscription.price.to_f / 100.0
   end
+
+  def sub_title
+    subscription.title
+  end
 end

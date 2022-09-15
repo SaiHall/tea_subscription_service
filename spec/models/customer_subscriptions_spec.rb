@@ -24,6 +24,7 @@ RSpec.describe CustomerSubscription, type: :model do
       expect(cust_sub.tea_name).to eq("White Jade")
       expect(cust_sub.sub_frequency).to eq("weekly")
       expect(cust_sub.cost).to eq(14.99)
+      expect(cust_sub.sub_title).to eq("White Tea Addict")
       expect(cust_sub.status).to eq("active") #not an instance method, checking default
     end
   end
