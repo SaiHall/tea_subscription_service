@@ -70,5 +70,17 @@ RSpec.describe 'Subscription creation endpoint' do
       response_body = JSON.parse(response.body,symbolize_names: true)
       expect(response_body[:message]).to eq("Validation failed: Subscription must exist")
     end
+
+    it 'will return an appropriate message when subscription id is absent' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      post "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      response_body = JSON.parse(response.body,symbolize_names: true)
+      expect(response_body[:message]).to eq("Validation failed: Subscription must exist, Subscription can't be blank")
+    end
   end
 end
