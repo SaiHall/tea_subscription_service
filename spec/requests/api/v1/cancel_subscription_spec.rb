@@ -35,17 +35,17 @@ RSpec.describe 'Subscription cancelation endpoint' do
     cancel_sub_return = response_body[:data]
 
     expect(cancel_sub_return).to be_a(Hash)
-    expect(cancel_sub_return.keys).to eq([:customer, :tea, :frequency, :cost, :status])
+    expect(cancel_sub_return.keys).to eq([:customer, :tea, :subscription, :frequency, :status])
     expect(cancel_sub_return[:customer]).to be_a(String)
     expect(cancel_sub_return[:tea]).to be_a(String)
+    expect(cancel_sub_return[:subscription]).to be_a(String)
     expect(cancel_sub_return[:frequency]).to be_a(String)
-    expect(cancel_sub_return[:cost]).to be_a(Float)
     expect(cancel_sub_return[:status]).to be_a(String)
 
     expect(cancel_sub_return[:customer]).to eq("Jimbob Dudeguy")
     expect(cancel_sub_return[:tea]).to eq("Lady Grey")
+    expect(cancel_sub_return[:subscription]).to eq("Grey Connoisseur")
     expect(cancel_sub_return[:frequency]).to eq("monthly")
-    expect(cancel_sub_return[:cost]).to eq(24.99)
     expect(cancel_sub_return[:status]).to eq("canceled")
   end
 end

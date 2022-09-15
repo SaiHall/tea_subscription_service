@@ -17,8 +17,8 @@ class CustomerSubscriptionSerializer
       data: {
         customer: "#{cust_sub.customer.first_name} #{cust_sub.customer.last_name}",
         tea: cust_sub.tea_name,
+        subscription: cust_sub.sub_title,
         frequency: cust_sub.sub_frequency,
-        cost: cust_sub.cost,
         status: cust_sub.status
       }
     }
