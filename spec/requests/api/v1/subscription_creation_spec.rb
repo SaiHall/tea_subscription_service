@@ -17,7 +17,7 @@ RSpec.describe 'Subscription creation endpoint' do
 
     post "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers, params: JSON.generate(sub_params)
     expect(response).to be_successful
-    # expect(response.status).to eq(201)
+    expect(response.status).to eq(200)
   end
 
   it 'can return information about the user and their new subscription' do

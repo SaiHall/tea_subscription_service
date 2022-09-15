@@ -19,5 +19,30 @@ RSpec.describe 'All customer subscriptions endpoint' do
 
     get "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers
     expect(response).to be_successful
+    # expect(response.status).to eq(200)
+  end
+
+  it 'will return all subscriptions that user has or had' do
+    headers = { "CONTENT_TYPE" => "application/json" }
+
+    get "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers
+
+    response_body = JSON.parse(response.body, symbolize_names: true)
+    index_return = response_body[:data]
+
+    expect(index_return).to be_a(Hash)
+    expect(index_return.keys).to eq([:customer, :subscriptions])
+    expect(index_return[:customer]).to be_a(String)
+    expect(index_return[:subscriptions]).to be_an(Array)
+
+    index_return[:subscriptions].each do |sub_return|
+      expect(sub_return).to be_a(Hash)
+      expect(sub_return.keys).to eq([:tea, :subscription, :frequency, :cost, :status])
+      expect(sub_return[:tea]).to be_a(String)
+      expect(sub_return[:subscription]).to be_a(String)
+      expect(sub_return[:cost]).to be_a(Float)
+      expect(sub_return[:frequency]).to be_a(String)
+      expect(sub_return[:status]).to be_a(String)
+    end
   end
 end
