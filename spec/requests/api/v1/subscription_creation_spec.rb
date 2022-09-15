@@ -43,4 +43,44 @@ RSpec.describe 'Subscription creation endpoint' do
     expect(new_sub_return[:cost]).to eq(14.99)
     expect(new_sub_return[:status]).to eq("active")
   end
+
+  describe 'error handling' do
+    it 'will return an appropriate message when customer id is invalid' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+      sub_params = { subscription_id: @sub1.id }
+
+      post "/api/v1/customers/4/subscriptions", headers: headers, params: JSON.generate(sub_params)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      response_body = JSON.parse(response.body,symbolize_names: true)
+      expect(response_body[:message]).to eq("Validation failed: Customer must exist")
+    end
+
+    it 'will return an appropriate message when subscription id is invalid' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+      sub_params = { subscription_id: 9999999 }
+
+      post "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers, params: JSON.generate(sub_params)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      response_body = JSON.parse(response.body,symbolize_names: true)
+      expect(response_body[:message]).to eq("Validation failed: Subscription must exist")
+    end
+
+    it 'will return an appropriate message when subscription id is absent' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      post "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      response_body = JSON.parse(response.body,symbolize_names: true)
+      expect(response_body[:message]).to eq("Validation failed: Subscription must exist, Subscription can't be blank")
+    end
+  end
 end

@@ -49,4 +49,31 @@ RSpec.describe 'Subscription cancelation endpoint' do
     expect(cancel_sub_return[:frequency]).to eq("monthly")
     expect(cancel_sub_return[:status]).to eq("canceled")
   end
+
+  describe 'error handling' do
+    it 'will return an appropriate message when CustomerSubscription id is invalid' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+      cancel_params = { cust_sub: 999999999 }
+
+      put "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers, params: JSON.generate(cancel_params)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      response_body = JSON.parse(response.body,symbolize_names: true)
+      expect(response_body[:message]).to eq("Couldn't find CustomerSubscription with 'id'=999999999")
+    end
+
+    it 'will return an appropriate message when CustomerSubscription id is absent' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      put "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      response_body = JSON.parse(response.body,symbolize_names: true)
+      expect(response_body[:message]).to eq("Couldn't find CustomerSubscription without an ID")
+    end
+  end
 end
