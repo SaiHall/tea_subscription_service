@@ -23,4 +23,21 @@ class CustomerSubscriptionSerializer
       }
     }
   end
+
+  def self.all_subs(customer)
+    {
+      data: {
+        customer: "#{customer.first_name} #{customer.last_name}",
+        subscriptions: customer.customer_subscriptions.map do |sub|
+          {
+            tea: sub.tea_name,
+            subscription: sub.sub_title,
+            frequency: sub.sub_frequency,
+            cost: sub.cost,
+            status: sub.status
+          }
+        end
+      }
+    }
+  end
 end

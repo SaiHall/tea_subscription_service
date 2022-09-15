@@ -12,8 +12,8 @@ class Api::V1::CustomerSubscriptionsController < ApplicationController
   end
 
   def index
-    binding.pry
-    customer = Customer.find(params["customer_id"])
+    customer = Customer.find(params[:customer_id])
+    render json: CustomerSubscriptionSerializer.all_subs(customer)
   end
 
   private

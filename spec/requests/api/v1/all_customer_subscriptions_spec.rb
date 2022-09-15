@@ -19,7 +19,7 @@ RSpec.describe 'All customer subscriptions endpoint' do
 
     get "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers
     expect(response).to be_successful
-    # expect(response.status).to eq(200)
+    expect(response.status).to eq(200)
   end
 
   it 'will return all subscriptions that user has or had' do
@@ -35,7 +35,7 @@ RSpec.describe 'All customer subscriptions endpoint' do
     expect(index_return[:customer]).to be_a(String)
     expect(index_return[:subscriptions]).to be_an(Array)
     expect(index_return[:subscriptions].length).to eq(2)
-    
+
 
     index_return[:subscriptions].each do |sub_return|
       expect(sub_return).to be_a(Hash)
