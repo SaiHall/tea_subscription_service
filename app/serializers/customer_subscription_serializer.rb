@@ -11,4 +11,16 @@ class CustomerSubscriptionSerializer
       }
     }
   end
+
+  def self.update_sub(cust_sub)
+    {
+      data: {
+        customer: "#{cust_sub.customer.first_name} #{cust_sub.customer.last_name}",
+        tea: cust_sub.tea_name,
+        subscription: cust_sub.sub_title,
+        frequency: cust_sub.sub_frequency,
+        status: cust_sub.status
+      }
+    }
+  end
 end
