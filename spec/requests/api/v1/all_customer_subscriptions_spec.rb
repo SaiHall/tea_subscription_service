@@ -16,9 +16,8 @@ RSpec.describe 'All customer subscriptions endpoint' do
 
   it 'can get a successful response' do
     headers = { "CONTENT_TYPE" => "application/json" }
-    cust_params = { customer_id: @customer1.id }
 
-    get "/api/v1/subscriptions", headers: headers, params: JSON.generate(cust_params)
+    get "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers
     expect(response).to be_successful
   end
 end
