@@ -12,12 +12,16 @@ RSpec.describe 'Subscription cancelation endpoint' do
     @sub2 = Subscription.create!(title: "Grey Connoisseur", frequency: 1, price: 2499, tea_id: tea2.id)
   end
 
-  it 'can get a successful response' do
+  it 'can get a successful response, and change the status of a CustSub' do
     headers = { "CONTENT_TYPE" => "application/json" }
     active_sub = CustomerSubscription.create!({ customer_id: @customer1.id, subscription_id: @sub1.id })
     cancel_params = { cust_sub: active_sub.id }
 
     put "/api/v1/subscriptions", headers: headers, params: JSON.generate(cancel_params)
     expect(response).to be_successful
+    canceled_sub = CustomerSubscription.all
+
+    expect(canceled_sub.length).to eq(1)
+    expect(canceled_sub.first.status).to eq("canceled")
   end
 end
