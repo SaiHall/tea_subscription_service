@@ -17,8 +17,9 @@ RSpec.describe 'Subscription cancelation endpoint' do
     headers = { "CONTENT_TYPE" => "application/json" }
     cancel_params = { cust_sub: @active_sub.id }
 
-    put "/api/v1/subscriptions", headers: headers, params: JSON.generate(cancel_params)
+    put "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers, params: JSON.generate(cancel_params)
     expect(response).to be_successful
+    expect(response.status).to eq(200)
     canceled_sub = CustomerSubscription.all
 
     expect(canceled_sub.length).to eq(1)
@@ -29,7 +30,7 @@ RSpec.describe 'Subscription cancelation endpoint' do
     headers = { "CONTENT_TYPE" => "application/json" }
     cancel_params = { cust_sub: @active_sub.id }
 
-    put "/api/v1/subscriptions", headers: headers, params: JSON.generate(cancel_params)
+    put "/api/v1/customers/#{@customer1.id}/subscriptions", headers: headers, params: JSON.generate(cancel_params)
 
     response_body = JSON.parse(response.body, symbolize_names: true)
     cancel_sub_return = response_body[:data]
