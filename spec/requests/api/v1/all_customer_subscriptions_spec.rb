@@ -34,6 +34,8 @@ RSpec.describe 'All customer subscriptions endpoint' do
     expect(index_return.keys).to eq([:customer, :subscriptions])
     expect(index_return[:customer]).to be_a(String)
     expect(index_return[:subscriptions]).to be_an(Array)
+    expect(index_return[:subscriptions].length).to eq(2)
+    
 
     index_return[:subscriptions].each do |sub_return|
       expect(sub_return).to be_a(Hash)
