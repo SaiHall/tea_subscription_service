@@ -47,4 +47,33 @@ RSpec.describe 'All customer subscriptions endpoint' do
       expect(sub_return[:status]).to be_a(String)
     end
   end
+
+  describe 'error handling' do
+    it 'will return an appropriate message when customer id is invalid' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      get "/api/v1/customers/99999999/subscriptions", headers: headers
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      response_body = JSON.parse(response.body,symbolize_names: true)
+      expect(response_body[:message]).to eq("Couldn't find Customer with 'id'=99999999")
+    end
+
+    it 'will suceed but subscriptions will be empty if a cust has none' do
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      get "/api/v1/customers/#{@customer2.id}/subscriptions", headers: headers
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+
+      response_body = JSON.parse(response.body,symbolize_names: true)
+      expect(response_body[:data]).to be_a(Hash)
+      expect(response_body[:data].keys).to eq([:customer, :subscriptions])
+      expect(response_body[:data][:customer]).to eq("Ivanna Pepsi")
+      expect(response_body[:data][:subscriptions]).to eq([])
+    end
+  end
 end
