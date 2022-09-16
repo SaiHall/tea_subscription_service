@@ -77,18 +77,23 @@ In order to use or work on this repo, please clone down the repo from github and
  * Run one of the following:
    - ``POST localhost:3000/api/v1/customers/#{yourcustomerIDhere}/subscriptions``
       + This will subscribe a user to a tea subscription. Please ensure you are sending a JSON body with the Subscription ID your customer is subscribing to.
+      
        ![Screen Shot 2022-09-15 at 7 37 21 PM](https://user-images.githubusercontent.com/99222755/190527301-a2973e39-c9f4-43d1-b5c0-78a3754d0f23.png)
       + You can expect a response that looks like this:
+      
        ![Screen Shot 2022-09-15 at 7 37 27 PM](https://user-images.githubusercontent.com/99222755/190527479-d2039455-afd5-4554-aad5-e4fdd926c691.png)
    - ``PUT localhost:3000/api/v1/customers/#{yourcustomerIDhere}/subscriptions``
      + This will cancel a users subscription. Please ensure you are sending a JSON body with the CustomerSubscription ID of the subscription you'd like to cancel.
+     
       ![Screen Shot 2022-09-15 at 7 35 34 PM](https://user-images.githubusercontent.com/99222755/190527661-9e4ade25-a3e9-4280-9476-134b9084a3a7.png)
      + You can expect a response that looks like this:
+     
       ![Screen Shot 2022-09-15 at 7 35 24 PM](https://user-images.githubusercontent.com/99222755/190527747-cc8f06f7-7341-4a36-be96-5d9dd5d0072d.png)
 
    - ``GET localhost:3000/api/v1/customers/#{yourcustomerIDhere}/subscriptions``
      + This endpoint does not require anything in the JSON body to function.
      + You can expect a response that looks like this:
+     
       ![Screen Shot 2022-09-15 at 7 51 06 PM](https://user-images.githubusercontent.com/99222755/190527990-8e97b0fd-747a-438a-a51b-b6fd00d80236.png)
 
 
