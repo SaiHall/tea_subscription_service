@@ -1,9 +1,7 @@
 # Tea Subscription Service
 [<img src="https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white"/>](https://www.ruby-lang.org/en/) 
-**Version 2.7.4**
 
 [<img src="https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white"/>](https://rubyonrails.org/)
-**Version 7.0.4**
 
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
@@ -14,6 +12,12 @@ Tea Subscription Service is designed as an API to serve a Front End, and is desi
  - Create a Tea Subscription for a Customer
  - Cancel a Subscription
  - List all Subscriptions a Customer, whether active or canceled
+
+## Database
+
+The database for this project is included below:
+
+![Screen Shot 2022-09-15 at 8 09 51 PM](https://user-images.githubusercontent.com/99222755/190529825-18f7f9e5-36f4-4e7f-86aa-33cbe2723fca.png)
 
 
 ## Getting Started
